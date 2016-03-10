@@ -5,6 +5,7 @@ import About from '../About'
 import Repos from '../Repos'
 import Repo from '../Repo'
 import Home from '../Home'
+import PromptContainer from '../containers/PromptContainer'
 
 module.exports = (
   <Route path="/" component={App}>
@@ -13,5 +14,7 @@ module.exports = (
       <Route path="/repos/:userName/:repoName" component={Repo}/>
     </Route>
     <Route path="/about" component={About}/>
+    <Route path="/playerOne" header="Player One" component={PromptContainer}/>
+    <Route path="/playerTwo/:playerOne" header="Player Two" component={PromptContainer}/>
   </Route>
 )
