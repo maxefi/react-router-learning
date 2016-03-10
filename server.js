@@ -3,7 +3,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 // use these to match the url to routes and then render
 import { match, RouterContext } from 'react-router'
-import routes from './modules/routes'
+import routes from './modules/config/routes'
 
 var express = require('express')
 var path = require('path')

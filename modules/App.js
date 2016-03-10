@@ -11,7 +11,7 @@ export default React.createClass({
 export default React.createClass({
   render() {
     return (
-      <div>
+      <div className='container_main'>
         <h1>React Router Tutorial</h1>
         <ul role="nav">
         <li>
