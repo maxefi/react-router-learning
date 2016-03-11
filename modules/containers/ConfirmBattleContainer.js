@@ -1,48 +1,45 @@
 import React from 'react'
 import ConfirmBattle from '../components/ConfirmBattle'
+import githubHelpers from '../utils/githubHelpers'
 
 export default React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
 
-  // 1
   getInitialState() {
-    console.log('getInitialState');
     return {
       isLoading: true,
-      playerInfo: []
+      playersInfo: []
     }
   },
 
-  // 2
-  componentWillMount() {
-    console.log('componentWillMount');
-  },
-
-  // 4
   componentDidMount() {
     const query = this.props.location.query;
-    console.log('componentDidMount');
-    // Fetch info from VK then update state
+    githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
+      .then(function(players) {
+        this.setState({
+          isLoading: false,
+          playersInfo: [players[0], players[1]]
+        })
+      }.bind(this))
   },
 
-  // 5
-  componentWillReceiveProps() {
-    console.log('componentWillReceiveProps');
+  handleInitiateBattle() {
+    this.context.router.push({
+      pathname: '/results',
+      state: {
+        playersInfo: this.state.playersInfo
+      }
+    })
   },
 
-  // 6
-  componentWillMount() {
-    console.log('componentWillMount');
-  },
-
-  // 3
   render() {
     return (
       <ConfirmBattle
         isLoading={this.state.isLoading}
-        playerInfo={this.state.playerInfo}/>
+        onInitiateBattle={this.handleInitiateBattle}
+        playersInfo={this.state.playersInfo}/>
     )
   }
 });

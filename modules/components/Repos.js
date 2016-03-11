@@ -5,7 +5,7 @@ import NavLink from '../components/NavLink'
 const Repos = (props) => {
   return (
     <div>
-      <h2>Repos</h2>
+      <h2>{props.header}</h2>
       <ul>
         <li><NavLink to="/repos/rackt/react-router">React Router</NavLink></li>
         <li><NavLink to="/repos/facebook/react">React</NavLink></li>
@@ -15,15 +15,17 @@ const Repos = (props) => {
           <input
             type="text"
             placeholder="userName"
-            value={props.userName}/> / {' '}
+            onChange={props.onUpdateUsername}
+            value={props.username}/> / {' '}
           <input
             type="text"
             placeholder="repo"
+            onChange={props.onUpdateRepo}
             value={props.repo}/>{' '}
           <button type="submit">Go</button>
         </form>
       </div>
-      {props.children}
+      <p>{props.username}</p>
     </div>
   )
 }

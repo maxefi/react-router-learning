@@ -11,7 +11,7 @@ import ConfirmBattleContainer from '../containers/ConfirmBattleContainer'
 module.exports = (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
-    <Route path="/repos" component={ReposContainer}>
+    <Route path="/repos" header="Repos" component={ReposContainer}>
       <Route path="/repos/:userName/:repoName" component={Repo}/>
     </Route>
     <Route path="/about" component={About}/>

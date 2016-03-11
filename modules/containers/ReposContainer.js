@@ -1,17 +1,39 @@
 import React from 'react'
-import { Link } from 'react-router'
-import NavLink from '../components/NavLink'
-import { browserHistory } from 'react-router'
+import Repos from '../components/Repos'
 
 export default React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
 
-  handleSubmit(event) {
-    event.preventDefault()
-    const userName = event.target.elements[0].value
-    const repo = event.target.elements[1].value
+  getInitialState() {
+    return {
+      userName: '',
+      repo: ''
+    }
+  },
+
+  handleUpdateUsername(e) {
+    this.setState({
+      userName: e.target.value
+    })
+  },
+
+  handleUpdateRepo(e) {
+    this.setState({
+      repo: e.target.value
+    })
+  },
+
+  handleSubmit(e) {
+    e.preventDefault()
+    const userName = this.state.userName
+    const repo = this.state.repo
+    this.setState({
+      userName: '',
+      repo: ''
+    });
+
     const path = '/repos/' + userName + '/' + repo
     this.context.router.push(path)
     console.log(path)
@@ -19,21 +41,13 @@ export default React.createClass({
 
   render() {
     return (
-      <div>
-        <h2>Repos</h2>
-        <ul>
-          <li><NavLink to="/repos/rackt/react-router">React Router</NavLink></li>
-          <li><NavLink to="/repos/facebook/react">React</NavLink></li>
-        </ul>
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="userName"/> / {' '}
-            <input type="text" placeholder="repo"/>{' '}
-            <button type="submit">Go</button>
-          </form>
-        </div>
-        {this.props.children}
-      </div>
+      <Repos
+        onUpdateUsername={this.handleUpdateUsername}
+        onUpdateRepo={this.handleUpdateRepo}
+        onSubmit={this.handleSubmit}
+        header={this.props.route.header}
+        username={this.state.userName}
+        repo={this.state.repo}/>
     )
   }
 })
