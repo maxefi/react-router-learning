@@ -1,3 +1,16 @@
 .active {
   color: #4cae4c;
 }
+
+.appear-enter {
+  opacity: 0;
+  transition: opacity .7s ease-out;
+}
+
+.appear-enter.appear-enter-active {
+  opacity: 1;
+}
+
+.appear-leave {
+  opacity: 0;
+}

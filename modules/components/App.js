@@ -1,8 +1,8 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { Link } from 'react-router'
 import NavLink from './NavLink'
-
-
+require('../../public/index.css')
 
 export default React.createClass({
   render() {
@@ -24,7 +24,12 @@ export default React.createClass({
           </div>
         </div>
         <div className="col-sm-12 text-center">
-          {this.props.children}
+          <ReactCSSTransitionGroup
+            transitionName="appear"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}>
+            {React.cloneElement(this.props.children, {key: this.props.location.pathname})}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     )

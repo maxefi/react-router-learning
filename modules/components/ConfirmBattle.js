@@ -1,29 +1,25 @@
-import React from 'react'
-import { PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 import styles from '../styles/styles'
 
 import UserDetails from '../components/UserDetails'
-
-function puke (obj) {
-  return <pre>{JSON.stringify(obj, null, ' ')}</pre>
-}
+import UserDetailsWrapper from '../components/UserDetailsWrapper'
+import MainContainer from '../components/MainContainer'
+import Loading from '../components/Loading'
 
 const ConfirmBattle = (props) => {
   return props.isLoading === true
-    ? <p>LOADING</p>
-    : <div className="jumbotron col-sm-12 text-center" style={styles.transparentBg}>
+    ? <Loading speed={800} text='Wait a moment'/>
+    : <MainContainer>
         <h1>Confirm Players</h1>
         <div className="col-sm-8 col-sm-offset-2">
-          <div className="col-sm-6">
-            <p className="lead">Player 1</p>
-              {puke(props.playersInfo[0])}
-          </div>
-          <div className="col-sm-6">
-            <p className="lead">Player 2</p>
-              {puke(props.playersInfo[1])}
-          </div>
+          <UserDetailsWrapper header='Player One'>
+            <UserDetails info={props.playersInfo[0]} />
+          </UserDetailsWrapper>
+          <UserDetailsWrapper header='Player Two'>
+            <UserDetails info={props.playersInfo[1]} />
+          </UserDetailsWrapper>
         </div>
         <div className="col-sm-8 col-sm-offset-2">
           <div className="col-sm-12" style={styles.space}>
@@ -37,7 +33,7 @@ const ConfirmBattle = (props) => {
             </Link>
           </div>
         </div>
-      </div>
+      </MainContainer>
 }
 
 ConfirmBattle.propTypes = {
